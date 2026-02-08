@@ -1,50 +1,80 @@
-# Welcome to your Expo app 👋
+# React Native Showcase
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A demo app built with **React Native** and **Expo** that showcases practical patterns, performance techniques, and best practices for production applications. Each feature is presented as a runnable screen with side-by-side or tabbed comparisons (e.g. “bad” vs “optimized”) where relevant.
 
-## Get started
+## Tech Stack
 
-1. Install dependencies
+- **React Native** (Expo SDK 54)
+- **Expo Router** – file-based navigation
+- **TypeScript**
+- **React Navigation** – Stack & Tabs
+- **expo-image** – cached image loading
+- **@shopify/flash-list** – high-performance lists
+- **react-native-reanimated** – animations
+
+## Project Structure
+
+```
+app/
+  (tabs)/          # Main tab (home = feature group grid)
+  group/[id].tsx    # List of features in a group
+  feature/[screen].tsx  # Dynamic feature demo screen
+constants/
+  features.ts       # Feature groups & items (metadata)
+  theme.ts          # Colors, fonts
+screens/           # Feature screen components
+  performance/     # FlatList, FlashList, re-render, windowSize
+  feature-registry.tsx  # Screen name → component map
+```
+
+The home screen shows a **grid of feature groups**. Tapping a group opens its feature list; tapping a feature opens the corresponding demo screen.
+
+## Getting Started
+
+1. **Install dependencies**
 
    ```bash
    npm install
    ```
 
-2. Start the app
+2. **Start the development server**
 
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+3. Run the app in a simulator, emulator, or [Expo Go](https://expo.dev/go).
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+   - iOS simulator: press `i` in the terminal or use `npm run ios`
+   - Android emulator: press `a` or use `npm run android`
+   - Web: press `w` or use `npm run web`
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Feature Categories
 
-## Get a fresh project
+| Category | Description |
+|----------|-------------|
+| **Performance & Lists** | FlatList optimization, FlashList, re-render tracking, `windowSize` / `maxToRenderPerBatch` |
+| **Images & Media** | Image caching (RN Image vs expo-image), lazy grids, video |
+| **Forms & Validation** | React Hook Form, keyboard handling |
+| **State Management** | Context vs Zustand, Redux Toolkit, persisted state |
+| **Animations & Gestures** | Reanimated, gesture handler |
+| **Networking** | REST API, pagination, retry & timeout |
+| **Local Storage** | AsyncStorage, MMKV, SQLite |
+| **Native & Platform** | Native modules, platform-specific code |
+| **Debug & Optimization** | Flipper, FPS monitoring |
 
-When you're ready, run:
+Screens are added incrementally; unimplemented features show a “Coming soon” state.
 
-```bash
-npm run reset-project
-```
+## Scripts
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+| Command | Description |
+|---------|-------------|
+| `npm start` | Start Expo dev server |
+| `npm run ios` | Run on iOS simulator |
+| `npm run android` | Run on Android emulator |
+| `npm run web` | Run in browser |
+| `npm run lint` | Run ESLint |
 
-## Learn more
+## License
 
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Private project.
