@@ -6,14 +6,14 @@ import { ThemedView } from '@/components/themed-view';
 import { FEATURE_SCREEN_REGISTRY } from '@/screens/feature-registry';
 
 export default function FeatureScreen() {
-  const { screen } = useLocalSearchParams<{ screen: string }>();
-  const Component = screen ? FEATURE_SCREEN_REGISTRY[screen] : null;
+  const { id } = useLocalSearchParams<{ id: string }>();
+  const Component = id ? FEATURE_SCREEN_REGISTRY[id] : null;
 
   if (!Component) {
     return (
       <ThemedView style={styles.center}>
         <ThemedText type="subtitle">Coming soon</ThemedText>
-        <ThemedText style={styles.hint}>{screen || 'Unknown screen'}</ThemedText>
+        <ThemedText style={styles.hint}>{id || 'Unknown id'}</ThemedText>
       </ThemedView>
     );
   }

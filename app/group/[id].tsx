@@ -1,18 +1,18 @@
-import { useLocalSearchParams, useRouter, useNavigation } from 'expo-router';
+import { useLocalSearchParams, useNavigation, useRouter } from 'expo-router';
 import { useEffect } from 'react';
 import { FlatList, Pressable, StyleSheet } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { FEATURES } from '@/constants/features';
 import type { FeatureItem } from '@/constants/features';
+import { FEATURES } from '@/constants/features';
 
 function FeatureRow({ item }: { item: FeatureItem }) {
   const router = useRouter();
   return (
     <Pressable
       style={({ pressed }) => [styles.row, pressed && styles.rowPressed]}
-      onPress={() => router.push({ pathname: '/feature/[screen]', params: { screen: item.screen } } as never)}>
+      onPress={() => router.push({ pathname: '/feature/[id]', params: { id: item.screen } } as never)}>
       <ThemedText type="subtitle" style={styles.rowTitle}>
         {item.title}
       </ThemedText>
