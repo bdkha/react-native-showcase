@@ -2,6 +2,7 @@ import React from 'react';
 
 import FlatListOptimizationScreen from '@/screens/performance/FlatListOptimizationScreen';
 import FlashListScreen from '@/screens/performance/FlashListScreen';
+import ImageCachingScreen from '@/screens/image-and-media/ImageCachingScreen';
 import ReRenderTrackerScreen from '@/screens/performance/ReRenderTrackerScreen';
 import WindowSizeScreen from '@/screens/performance/WindowSizeScreen';
 
@@ -12,4 +13,5 @@ export const FEATURE_SCREEN_REGISTRY: Record<string, FeatureScreenComponent> = {
   FlashListScreen,
   ReRenderTrackerScreen,
   WindowSizeScreen,
+  ImageCachingScreen,
 };
