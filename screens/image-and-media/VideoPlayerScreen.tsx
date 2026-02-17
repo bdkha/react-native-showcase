@@ -1,61 +1,45 @@
-import { Video, ResizeMode } from 'expo-av';
+import { useEvent } from 'expo';
+import { useVideoPlayer, VideoView } from 'expo-video';
 import React, { useCallback, useRef, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
-import { Collapsible } from '@/components/ui/collapsible';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
+import { Collapsible } from '@/components/ui/collapsible';
 
 const SOURCE =
-  'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4';
+  'https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8';
 
 export default function VideoPlayerScreen() {
-  const videoRef = useRef<Video | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const ref = useRef<VideoView>(null);
   const [isMuted, setIsMuted] = useState(false);
-  const [isBuffering, setIsBuffering] = useState(false);
 
-  const togglePlayPause = useCallback(async () => {
-    if (!videoRef.current) {
-      return;
-    }
-    const status = await videoRef.current.getStatusAsync();
-    if (!status.isLoaded) {
-      return;
-    }
-    if (status.isPlaying) {
-      await videoRef.current.pauseAsync();
-      setIsPlaying(false);
+  const player = useVideoPlayer(SOURCE, (p) => {
+    p.loop = true;
+    p.play();
+  });
+
+  const { isPlaying } = useEvent(player, 'playingChange', {
+    isPlaying: player.playing,
+  });
+
+  const togglePlayPause = useCallback(() => {
+    if (isPlaying) {
+      player.pause();
     } else {
-      await videoRef.current.playAsync();
-      setIsPlaying(true);
+      player.play();
     }
-  }, []);
+  }, [isPlaying, player]);
 
-  const toggleMute = useCallback(async () => {
-    if (!videoRef.current) {
-      return;
-    }
+  const toggleMute = useCallback(() => {
     const next = !isMuted;
-    await videoRef.current.setIsMutedAsync(next);
+    player.muted = next;
     setIsMuted(next);
-  }, [isMuted]);
+  }, [isMuted, player]);
 
-  const replay = useCallback(async () => {
-    if (!videoRef.current) {
-      return;
-    }
-    await videoRef.current.replayAsync();
-    setIsPlaying(true);
-  }, []);
-
-  const handleStatusUpdate = useCallback((status: any) => {
-    if (!status.isLoaded) {
-      setIsBuffering(false);
-      return;
-    }
-    setIsBuffering(status.isBuffering ?? false);
-  }, []);
+  const replay = useCallback(() => {
+    player.replay();
+  }, [player]);
 
   return (
     <ThemedView style={styles.container}>
@@ -72,14 +56,12 @@ export default function VideoPlayerScreen() {
         </Collapsible>
       </View>
       <View style={styles.playerWrapper}>
-        <Video
-          ref={videoRef}
+        <VideoView
+          ref={ref}
           style={styles.video}
-          source={{ uri: SOURCE }}
-          resizeMode={ResizeMode.CONTAIN}
-          useNativeControls={false}
-          isLooping
-          onPlaybackStatusUpdate={handleStatusUpdate}
+          player={player}
+          contentFit="contain"
+          nativeControls={false}
         />
       </View>
       <View style={styles.controls}>
@@ -93,11 +75,6 @@ export default function VideoPlayerScreen() {
           <ThemedText style={styles.controlText}>{isMuted ? 'Unmute' : 'Mute'}</ThemedText>
         </Pressable>
       </View>
-      {isBuffering && (
-        <View style={styles.bufferBadge}>
-          <ThemedText style={styles.bufferText}>Buffering...</ThemedText>
-        </View>
-      )}
     </ThemedView>
   );
 }
@@ -142,12 +119,4 @@ const styles = StyleSheet.create({
   controlText: {
     fontWeight: '600',
   },
-  bufferBadge: {
-    marginTop: 12,
-    alignItems: 'center',
-  },
-  bufferText: {
-    fontSize: 13,
-  },
 });
-
