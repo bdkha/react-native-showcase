@@ -12,6 +12,7 @@ import KeyboardHandlingScreen from '@/screens/forms/KeyboardHandlingScreen';
 import ContextVsZustandScreen from '@/screens/state/ContextVsZustandScreen';
 import ReduxToolkitScreen from '@/screens/state/ReduxToolkitScreen';
 import PersistStateScreen from '@/screens/state/PersistStateScreen';
+import ReanimatedBasicScreen from '@/screens/animation/ReanimatedBasicScreen';
 
 export type FeatureScreenComponent = React.ComponentType;
 
@@ -28,4 +29,5 @@ export const FEATURE_SCREEN_REGISTRY: Record<string, FeatureScreenComponent> = {
   ContextVsZustandScreen,
   ReduxToolkitScreen,
   PersistStateScreen,
+  ReanimatedBasicScreen,
 };
