@@ -11,6 +11,7 @@ import ReactHookFormScreen from '@/screens/forms/ReactHookFormScreen';
 import KeyboardHandlingScreen from '@/screens/forms/KeyboardHandlingScreen';
 import ContextVsZustandScreen from '@/screens/state/ContextVsZustandScreen';
 import ReduxToolkitScreen from '@/screens/state/ReduxToolkitScreen';
+import PersistStateScreen from '@/screens/state/PersistStateScreen';
 
 export type FeatureScreenComponent = React.ComponentType;
 
@@ -26,4 +27,5 @@ export const FEATURE_SCREEN_REGISTRY: Record<string, FeatureScreenComponent> = {
   KeyboardHandlingScreen,
   ContextVsZustandScreen,
   ReduxToolkitScreen,
+  PersistStateScreen,
 };
