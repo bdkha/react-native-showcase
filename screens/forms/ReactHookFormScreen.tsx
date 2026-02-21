@@ -1,15 +1,7 @@
 import React, { useState } from 'react';
-import {
-  Alert,
-  KeyboardAvoidingView,
-  Platform,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  TextInput,
-  View,
-} from 'react-native';
+import { Alert, Pressable, StyleSheet, TextInput, View } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 
 import { Collapsible } from '@/components/ui/collapsible';
 import { ThemedText } from '@/components/themed-text';
@@ -60,13 +52,10 @@ export default function ReactHookFormScreen() {
 
   return (
     <ThemedView style={styles.container}>
-      <KeyboardAvoidingView
-        style={styles.flex}
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-        keyboardVerticalOffset={100}>
-        <ScrollView
-          contentContainerStyle={styles.scrollContent}
-          keyboardShouldPersistTaps="handled">
+      <KeyboardAwareScrollView
+        bottomOffset={62}
+        contentContainerStyle={styles.scrollContent}
+        keyboardShouldPersistTaps="handled">
           <View style={styles.noteContainer}>
             <Collapsible title="About this demo">
               <ThemedText style={styles.noteParagraph}>
@@ -233,17 +222,13 @@ export default function ReactHookFormScreen() {
               </View>
             )}
           </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
+      </KeyboardAwareScrollView>
     </ThemedView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-  },
-  flex: {
     flex: 1,
   },
   scrollContent: {
