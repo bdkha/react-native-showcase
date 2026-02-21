@@ -1,5 +1,6 @@
 import { useRouter } from 'expo-router';
 import { FlatList, Pressable, StyleSheet } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -24,8 +25,10 @@ function GroupCard({ group }: { group: FeatureGroup }) {
 }
 
 export default function HomeScreen() {
+  const insets = useSafeAreaInsets();
+
   return (
-    <ThemedView style={styles.container}>
+    <ThemedView style={[styles.container, { paddingTop: insets.top }]}>
       <ThemedText type="title" style={styles.header}>
         React Native Showcase
       </ThemedText>
