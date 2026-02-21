@@ -20,6 +20,8 @@ import RetryTimeoutScreen from '@/screens/networking/RetryTimeoutScreen';
 import AsyncStorageScreen from '@/screens/storage/AsyncStorageScreen';
 // import MMKVScreen from '@/screens/storage/MMKVScreen';
 import SQLiteScreen from '@/screens/storage/SQLiteScreen';
+import FlipperScreen from '@/screens/debug/FlipperScreen';
+import FPSMonitorScreen from '@/screens/debug/FPSMonitorScreen';
 
 export type FeatureScreenComponent = React.ComponentType;
 
@@ -44,4 +46,6 @@ export const FEATURE_SCREEN_REGISTRY: Record<string, FeatureScreenComponent> = {
   AsyncStorageScreen,
   // MMKVScreen,
   SQLiteScreen,
+  FlipperScreen,
+  FPSMonitorScreen,
 };
