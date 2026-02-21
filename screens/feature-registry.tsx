@@ -14,6 +14,9 @@ import ReduxToolkitScreen from '@/screens/state/ReduxToolkitScreen';
 import PersistStateScreen from '@/screens/state/PersistStateScreen';
 import ReanimatedBasicScreen from '@/screens/animation/ReanimatedBasicScreen';
 import GestureHandlerScreen from '@/screens/animation/GestureHandlerScreen';
+import RestApiScreen from '@/screens/networking/RestApiScreen';
+import PaginationScreen from '@/screens/networking/PaginationScreen';
+import RetryTimeoutScreen from '@/screens/networking/RetryTimeoutScreen';
 
 export type FeatureScreenComponent = React.ComponentType;
 
@@ -32,4 +35,7 @@ export const FEATURE_SCREEN_REGISTRY: Record<string, FeatureScreenComponent> = {
   PersistStateScreen,
   ReanimatedBasicScreen,
   GestureHandlerScreen,
+  RestApiScreen,
+  PaginationScreen,
+  RetryTimeoutScreen,
 };
